@@ -28,12 +28,10 @@ def on_ui_tabs():
       with gr.Group():
         b1=gr.Button()
         command = gr.Textbox(max_lines=1, placeholder="command")
-        text_out1 = gr.Textbox()
-        b1.click(run, [command], [text_out1])
-        
+        text_out = gr.Textbox()
         b2=gr.Button()
-        text_out2 = gr.Textbox()
-        b2.click(counter, [], [text_out2])
+        b1.click(run, [command], [text_out])
+        b2.click(counter, [], [text_out])
     return (ctest, "ctest", "ctest")
 script_callbacks.on_ui_tabs(on_ui_tabs)
 
