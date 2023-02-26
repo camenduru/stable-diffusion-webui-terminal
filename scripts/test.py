@@ -1,6 +1,6 @@
 import os, time
 import gradio as gr
-from modules import scripts, script_callbacks
+from modules import script_callbacks
 
 def counter():
   total = 10
@@ -25,19 +25,18 @@ def run(command):
 
 def on_ui_tabs():
     with gr.Blocks() as test:
-      b1=gr.Button()
-      command = gr.Textbox(max_lines=1, placeholder="command")
-      text_out1 = gr.Textbox()
-      b1.click(run, [command], [text_out1])
-
-      b2=gr.Button()
-      command = gr.Textbox(max_lines=1, placeholder="command")
-      text_out2 = gr.Textbox()
-      b2.click(counter, [], [text_out2])
+      with gr.Group():
+        b1=gr.Button()
+        command = gr.Textbox(max_lines=1, placeholder="command")
+        text_out1 = gr.Textbox()
+        b1.click(run, [command], [text_out1])
+        
+        b2=gr.Button()
+        text_out2 = gr.Textbox()
+        b2.click(counter, [], [text_out2])
     return (test, "test", "test")
- 
+script_callbacks.on_ui_tabs(on_ui_tabs)
+
 # test.queue()
 # test.dependencies[0]["show_progress"] = False
 # test.launch(debug=True, share=True, inline=False)
-
-script_callbacks.on_ui_tabs(on_ui_tabs)
