@@ -1,7 +1,7 @@
 import os, time
 import gradio as gr
 
-def init():
+def counter():
   total = 10
   print("header")
   yield f"\nheader"
@@ -15,20 +15,26 @@ def init():
   print(f"\nfooter")
   yield f"\nfooter"
   
-  
-def run4(command):
+def run(command):
     with os.popen(command) as pipe:
         for line in pipe:
             line = line.rstrip()
             print(line)
             yield line
 
-def on_ui_tabs():     
+def on_ui_tabs():
     with gr.Blocks() as test:
-    b1=gr.Button()
+
+    b1=gr.Button(show_progress=False)
     command = gr.Textbox(show_label=False, max_lines=1, placeholder="command")
     text_out = gr.Textbox()
-    b1.click(init, [], [text_out])
+    b1.click(run, [command], [text_out])
+
+    b2=gr.Button()
+    command = gr.Textbox(show_label=False, max_lines=1, placeholder="command")
+    text_out = gr.Textbox()
+    b2.click(counter, [], [text_out])
+
     return (test, "test", "test")
  
 # test.queue()
