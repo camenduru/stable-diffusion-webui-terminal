@@ -24,7 +24,7 @@ def run(command):
       yield line
 
 def on_ui_tabs():
-    with gr.Blocks() as test:
+    with gr.Blocks() as ctest:
       with gr.Group():
         b1=gr.Button()
         command = gr.Textbox(max_lines=1, placeholder="command")
@@ -34,7 +34,7 @@ def on_ui_tabs():
         b2=gr.Button()
         text_out2 = gr.Textbox()
         b2.click(counter, [], [text_out2])
-    return (test, "test", "test")
+    return (ctest, "ctest", "ctest")
 script_callbacks.on_ui_tabs(on_ui_tabs)
 
 # test.queue()
