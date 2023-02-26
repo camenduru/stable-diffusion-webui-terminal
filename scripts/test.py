@@ -6,35 +6,33 @@ def counter():
   print("header")
   yield f"\nheader"
   for i in range(total):
-      progress = "#" * (i + 1)
-      spaces = " " * (total - i - 1)
-      percent = (i + 1) * 10
-      print(f"\r[{progress}{spaces}] {percent}%", end='')
-      yield f"\r[{progress}{spaces}] {percent}%"
-      time.sleep(1)
+    progress = "#" * (i + 1)
+    spaces = " " * (total - i - 1)
+    percent = (i + 1) * 10
+    print(f"\r[{progress}{spaces}] {percent}%", end='')
+    yield f"\r[{progress}{spaces}] {percent}%"
+    time.sleep(1)
   print(f"\nfooter")
   yield f"\nfooter"
   
 def run(command):
-    with os.popen(command) as pipe:
-        for line in pipe:
-            line = line.rstrip()
-            print(line)
-            yield line
+  with os.popen(command) as pipe:
+    for line in pipe:
+      line = line.rstrip()
+      print(line)
+      yield line
 
 def on_ui_tabs():
     with gr.Blocks() as test:
+      b1=gr.Button()
+      command = gr.Textbox(max_lines=1, placeholder="command")
+      text_out = gr.Textbox()
+      b1.click(run, [command], [text_out])
 
-    b1=gr.Button(show_progress=False)
-    command = gr.Textbox(show_label=False, max_lines=1, placeholder="command")
-    text_out = gr.Textbox()
-    b1.click(run, [command], [text_out])
-
-    b2=gr.Button()
-    command = gr.Textbox(show_label=False, max_lines=1, placeholder="command")
-    text_out = gr.Textbox()
-    b2.click(counter, [], [text_out])
-
+      b2=gr.Button()
+      command = gr.Textbox(max_lines=1, placeholder="command")
+      text_out = gr.Textbox()
+      b2.click(counter, [], [text_out])
     return (test, "test", "test")
  
 # test.queue()
