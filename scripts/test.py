@@ -1,5 +1,6 @@
 import os, time
 import gradio as gr
+from modules import scripts, script_callbacks
 
 def counter():
   total = 10
