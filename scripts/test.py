@@ -26,13 +26,13 @@ def on_ui_tabs():
     with gr.Blocks() as test:
       b1=gr.Button()
       command = gr.Textbox(max_lines=1, placeholder="command")
-      text_out = gr.Textbox()
-      b1.click(run, [command], [text_out])
+      text_out1 = gr.Textbox()
+      b1.click(run, [command], [text_out1])
 
       b2=gr.Button()
       command = gr.Textbox(max_lines=1, placeholder="command")
-      text_out = gr.Textbox()
-      b2.click(counter, [], [text_out])
+      text_out2 = gr.Textbox()
+      b2.click(counter, [], [text_out2])
     return (test, "test", "test")
  
 # test.queue()
