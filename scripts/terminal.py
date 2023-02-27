@@ -13,7 +13,7 @@ def on_ui_tabs():
     with gr.Blocks() as run-command:
         gr.Markdown(
         """
-        ### 🦒 Colab Run Command
+        ### 💻 Terminal
         ```py
         model: wget https://huggingface.co/ckpt/anything-v4.5-vae-swapped/resolve/main/anything-v4.5-vae-swapped.safetensors -O /content/stable-diffusion-webui/models/Stable-diffusion/anything-v4.5-vae-swapped.safetensors
         lora:  wget https://huggingface.co/embed/Sakimi-Chan_LoRA/resolve/main/Sakimi-Chan_LoRA.safetensors -O /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/Sakimi-Chan_LoRA.safetensors
@@ -28,5 +28,5 @@ def on_ui_tabs():
                 out_text = gr.Textbox(show_label=False)
                 btn_run = gr.Button("run command")
                 btn_run.click(run, inputs=command, outputs=out_text)
-    return (run-command, "Run Command", "run-command"),
+    return (terminal, "Terminal", "terminal"),
 script_callbacks.on_ui_tabs(on_ui_tabs)
