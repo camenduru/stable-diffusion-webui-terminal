@@ -1,6 +1,6 @@
 import os, time
 import gradio as gr
-from modules import scripts, script_callbacks
+from modules import script_callbacks
 
 def run(command):
   with os.popen(command) as pipe:
