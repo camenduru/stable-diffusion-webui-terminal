@@ -1,4 +1,4 @@
-import os
+import os, time
 import gradio as gr
 from modules import scripts, script_callbacks
 
@@ -8,6 +8,13 @@ def run(command):
       line = line.rstrip()
       print(line)
       yield line
+
+def timeout_test(second):
+    start_time = time.time()
+    while time.time() - start_time < int(second):
+        pass
+    msg = "This is sample markdown message"
+    return msg
 
 def on_ui_tabs():     
     with gr.Blocks() as terminal:
@@ -28,5 +35,7 @@ def on_ui_tabs():
                 out_text = gr.Textbox(show_label=False)
                 btn_run = gr.Button("run command")
                 btn_run.click(run, inputs=command, outputs=out_text)
+                btn_timeout_test = gr.Button("timeout test")
+                btn_timeout_test.click(timeout_test, inputs=command, outputs=out_text)
     return (terminal, "Terminal", "terminal"),
 script_callbacks.on_ui_tabs(on_ui_tabs)
