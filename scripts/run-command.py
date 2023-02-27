@@ -10,7 +10,7 @@ def run(command):
       yield line
 
 def on_ui_tabs():     
-    with gr.Blocks() as colabtest:
+    with gr.Blocks() as run-command:
         gr.Markdown(
         """
         ### 🦒 Colab Run Command
@@ -28,5 +28,5 @@ def on_ui_tabs():
                 out_text = gr.Textbox(show_label=False)
                 btn_run = gr.Button("run command")
                 btn_run.click(run, inputs=command, outputs=out_text)
-    return (colabtest, "colabtest", "colabtest"),
+    return (run-command, "Run Command", "run-command"),
 script_callbacks.on_ui_tabs(on_ui_tabs)
