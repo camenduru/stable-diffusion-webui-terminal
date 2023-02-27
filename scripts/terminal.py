@@ -13,7 +13,7 @@ def timeout_test(second):
     start_time = time.time()
     while time.time() - start_time < int(second):
         pass
-    msg = "working 🥳"
+    msg = "🥳"
     return msg
 
 def on_ui_tabs():     
