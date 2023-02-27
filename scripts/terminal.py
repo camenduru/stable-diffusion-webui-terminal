@@ -10,7 +10,7 @@ def run(command):
       yield line
 
 def on_ui_tabs():     
-    with gr.Blocks() as run-command:
+    with gr.Blocks() as terminal:
         gr.Markdown(
         """
         ### 💻 Terminal
