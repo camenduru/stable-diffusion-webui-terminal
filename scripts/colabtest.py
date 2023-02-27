@@ -34,7 +34,3 @@ def on_ui_tabs():
         b2.click(counter, [], [text_out])
     return (ctest, "ctest", "ctest")
 script_callbacks.on_ui_tabs(on_ui_tabs)
-
-# test.queue()
-# test.dependencies[0]["show_progress"] = False
-# test.launch(debug=True, share=True, inline=False)
