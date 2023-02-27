@@ -1,14 +1,13 @@
 import os
-import numpy as np
 import gradio as gr
-from huggingface_hub import model_info, create_repo, create_branch, upload_folder, upload_file
-from huggingface_hub.utils import RepositoryNotFoundError, RevisionNotFoundError
 from modules import scripts, script_callbacks
-from subprocess import getoutput
 
 def run(command):
-    out = getoutput(f"{command}")
-    return out
+  with os.popen(command) as pipe:
+    for line in pipe:
+      line = line.rstrip()
+      print(line)
+      yield line
 
 def on_ui_tabs():     
     with gr.Blocks() as colabtest:
