@@ -289,6 +289,7 @@ def on_ui_tabs():
                     with gr.Accordion("Train Lora All Arguments", open=False):
                         gr.Markdown(
                         """
+                        ```py
                         -h, --help            show this help message and exit
                         --pretrained_model_name_or_path PRETRAINED_MODEL_NAME_OR_PATH
                                                 Path to pretrained model or model identifier from
