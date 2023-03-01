@@ -22,6 +22,9 @@ def timeout_test(second):
     msg = "🥳"
     return msg
 
+def clear_out_text():
+    return ""
+
 def on_ui_tabs():     
     with gr.Blocks() as terminal:
         with gr.Tab("💻 Terminal"):
@@ -211,5 +214,7 @@ def on_ui_tabs():
                 out_text = gr.Textbox(show_label=False)
                 btn_timeout_test = gr.Button("timeout test")
                 btn_timeout_test.click(timeout_test, inputs=command, outputs=out_text, show_progress=False)
+                btn_clear = gr.Button("clear")
+                btn_clear.click(clear_out_text, inputs=[], outputs=out_text, show_progress=False)
     return (terminal, "Terminal", "terminal"),
 script_callbacks.on_ui_tabs(on_ui_tabs)
