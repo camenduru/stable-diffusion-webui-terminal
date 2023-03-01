@@ -58,13 +58,13 @@ def on_ui_tabs():
             ```
             """)
             with gr.Group():
-                command = gr.Textbox(show_label=False, max_lines=1, placeholder="command")
+                command = gr.Textbox(show_label=False, max_lines=5, placeholder="command")
                 out_text = gr.Textbox(show_label=False)
                 btn_static = gr.Button("run static command")
                 btn_static.click(run_static, inputs=command, outputs=out_text)
         with gr.Tab("Training"):
             with gr.Tab("Install Diffusers"):
-                with gr.Box():
+                with gr.Group():
                     out_text = gr.Textbox(show_label=False)
                     btn_install_diffusers = gr.Button("Install Diffusers")
                     btn_install_diffusers.click(install_diffusers, [], outputs=out_text)
@@ -144,7 +144,8 @@ def on_ui_tabs():
                     btn_run_live = gr.Button("run live command")
                     btn_run_live.click(run_live, inputs=command, outputs=out_text)
         with gr.Tab("Tests"):
-            with gr.Box():
+            with gr.Group():
+                command = gr.Textbox(show_label=False, lines=1, placeholder="command")
                 out_text = gr.Textbox(show_label=False)
                 btn_timeout_test = gr.Button("timeout test")
                 btn_timeout_test.click(timeout_test, inputs=command, outputs=out_text)
