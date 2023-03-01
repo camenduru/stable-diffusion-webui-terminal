@@ -52,34 +52,34 @@ def on_ui_tabs():
         with gr.Tab("Training"):
             with gr.Tab("Train Dreambooth"):
                 with gr.Box():
-                    gr.Markdown(
-                    """
-                    ```py
-                    Train Dreambooth Arguments 
-                    --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
-                    --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
-                    --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir" \\
-                    --learning_rate=5e-6 \\
-                    --max_train_steps=650 \\
-                    --instance_prompt="parkminyoung" \\
-                    --resolution=512 \\
-                    --center_crop \\
-                    --train_batch_size=1 \\
-                    --gradient_accumulation_steps=1 \\
-                    --max_grad_norm=1.0 \\
-                    --mixed_precision="fp16" \\
-                    --gradient_checkpointing \\
-                    --enable_xformers_memory_efficient_attention \\
-                    --use_8bit_adam\n
-                    --with_prior_preservation \\
-                    --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/class_data_dir" \\
-                    --prior_loss_weight=1.0 \\
-                    --sample_batch_size=2 \\
-                    --class_prompt="person" \\
-                    --seed=69 \\
-                    --num_class_images=12 \\ \n
-                    ```
-                    """)
+                    gr.Accordion("Train Dreambooth Arguments"):
+                        gr.Markdown(
+                        """
+                        ```py
+                        --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
+                        --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
+                        --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir" \\
+                        --learning_rate=5e-6 \\
+                        --max_train_steps=650 \\
+                        --instance_prompt="parkminyoung" \\
+                        --resolution=512 \\
+                        --center_crop \\
+                        --train_batch_size=1 \\
+                        --gradient_accumulation_steps=1 \\
+                        --max_grad_norm=1.0 \\
+                        --mixed_precision="fp16" \\
+                        --gradient_checkpointing \\
+                        --enable_xformers_memory_efficient_attention \\
+                        --use_8bit_adam\n
+                        --with_prior_preservation \\
+                        --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/class_data_dir" \\
+                        --prior_loss_weight=1.0 \\
+                        --sample_batch_size=2 \\
+                        --class_prompt="person" \\
+                        --seed=69 \\
+                        --num_class_images=12 \\ \n
+                        ```
+                        """)
                     train_dreambooth_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/train_dreambooth.py \\
         --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
         --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
@@ -102,34 +102,34 @@ def on_ui_tabs():
                     btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
             with gr.Tab("Train LoRA"):
                 with gr.Box():
-                    gr.Markdown(
-                    """
-                    ```py
-                    Train Lora Arguments \\
-                    --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
-                    --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
-                    --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir" \\
-                    --learning_rate=5e-6 \\
-                    --max_train_steps=650 \\
-                    --instance_prompt="parkminyoung" \\
-                    --resolution=512 \\
-                    --center_crop \\
-                    --train_batch_size=1 \\
-                    --gradient_accumulation_steps=1 \\
-                    --max_grad_norm=1.0 \\
-                    --mixed_precision="fp16" \\
-                    --gradient_checkpointing \\
-                    --enable_xformers_memory_efficient_attention \\
-                    --use_8bit_adam\n
-                    --with_prior_preservation \\
-                    --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/class_data_dir" \\
-                    --prior_loss_weight=1.0 \\
-                    --sample_batch_size=2 \\
-                    --class_prompt="person" \\
-                    --seed=69 \\
-                    --num_class_images=12 \\ \n
-                    ```
-                    """)
+                    gr.Accordion("Train Ora Arguments"):
+                        gr.Markdown(
+                        """
+                        ```py
+                        --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
+                        --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
+                        --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir" \\
+                        --learning_rate=5e-6 \\
+                        --max_train_steps=650 \\
+                        --instance_prompt="parkminyoung" \\
+                        --resolution=512 \\
+                        --center_crop \\
+                        --train_batch_size=1 \\
+                        --gradient_accumulation_steps=1 \\
+                        --max_grad_norm=1.0 \\
+                        --mixed_precision="fp16" \\
+                        --gradient_checkpointing \\
+                        --enable_xformers_memory_efficient_attention \\
+                        --use_8bit_adam\n
+                        --with_prior_preservation \\
+                        --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/class_data_dir" \\
+                        --prior_loss_weight=1.0 \\
+                        --sample_batch_size=2 \\
+                        --class_prompt="person" \\
+                        --seed=69 \\
+                        --num_class_images=12 \\ \n
+                        ```
+                        """)
                     train_lora_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/train_dreambooth_lora.py \\
         --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
         --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
