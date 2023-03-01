@@ -148,65 +148,68 @@ def on_ui_tabs():
                     btn_run_live = gr.Button("Train Lora")
                     btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
         with gr.Tab("Convert"):
+            with gr.Group():
+                with gr.Box():
+                    gr.Markdown(
+                    """
+                    ```py
+                    Convert Diffusers to Original Stable Diffusion Arguments
+                    --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
+                    --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
+                    ```
+                    """)
+                    convert_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py \\
+            --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
+            --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt"""
+                    convert = gr.Textbox(show_label=False, lines=3, value=convert_command)
+                    btn_static = gr.Button("Convert Diffusers to Original Stable Diffusion")
+                    btn_static.click(run_static, inputs=convert, outputs=out_text, show_progress=False)
+                with gr.Box():
+                    gr.Markdown(
+                    """
+                    ```py
+                    Remove Dreambooth Output Directory
+                    rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*
+                    ```
+                    """)
+                    rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*"""
+                    rm = gr.Textbox(show_label=False, lines=1, value=rm_command)
+                    btn_static = gr.Button("Remove Dreambooth Output Directory")
+                    btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
             out_text = gr.Textbox(show_label=False)
-            with gr.Box():
-                gr.Markdown(
-                """
-                ```py
-                Convert Diffusers to Original Stable Diffusion Arguments
-                --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
-                --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
-                ```
-                """)
-                convert_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py \\
-        --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
-        --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt"""
-                convert = gr.Textbox(show_label=False, lines=3, value=convert_command)
-                btn_static = gr.Button("Convert Diffusers to Original Stable Diffusion")
-                btn_static.click(run_static, inputs=convert, outputs=out_text, show_progress=False)
-            with gr.Box():
-                gr.Markdown(
-                """
-                ```py
-                Copy Lora to Additional Network
-                cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors \\
-                /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors
-                ```
-                """)
-                cp_command = """cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors \\
-/content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors"""
-                cp = gr.Textbox(show_label=False, lines=2, value=cp_command)
-                btn_static = gr.Button("Copy Lora to Additional Network")
-                btn_static.click(run_static, inputs=cp, outputs=out_text, show_progress=False)
-            with gr.Box():
-                gr.Markdown(
-                """
-                ```py
-                Remove Dreambooth Output Directory
-                rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*
-                ```
-                """)
-                rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*"""
-                rm = gr.Textbox(show_label=False, lines=1, value=rm_command)
-                btn_static = gr.Button("Remove Dreambooth Output Directory")
-                btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
-            with gr.Box():
-                gr.Markdown(
-                """
-                ```py
-                Remove Lora Output Directory
-                rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/*
-                ```
-                """)
-                rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/*"""
-                rm = gr.Textbox(show_label=False, lines=1, value=rm_command)
-                btn_static = gr.Button("Remove Lora Output Directory")
-                btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
-        with gr.Tab("Tests"):
-            with gr.Box():
-                command = gr.Textbox(show_label=False, lines=1, placeholder="command")
-                out_text = gr.Textbox(show_label=False)
-                btn_timeout_test = gr.Button("timeout test")
-                btn_timeout_test.click(timeout_test, inputs=command, outputs=out_text, show_progress=False)
+            with gr.Group():
+                with gr.Box():
+                    gr.Markdown(
+                    """
+                    ```py
+                    Copy Lora to Additional Network
+                    cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors \\
+                    /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors
+                    ```
+                    """)
+                    cp_command = """cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors \\
+        /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors"""
+                    cp = gr.Textbox(show_label=False, lines=2, value=cp_command)
+                    btn_static = gr.Button("Copy Lora to Additional Network")
+                    btn_static.click(run_static, inputs=cp, outputs=out_text, show_progress=False)
+                with gr.Box():
+                    gr.Markdown(
+                    """
+                    ```py
+                    Remove Lora Output Directory
+                    rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/*
+                    ```
+                    """)
+                    rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/*"""
+                    rm = gr.Textbox(show_label=False, lines=1, value=rm_command)
+                    btn_static = gr.Button("Remove Lora Output Directory")
+                    btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
+            with gr.Tab("Tests"):
+                with gr.Box():
+                    command = gr.Textbox(show_label=False, lines=1, placeholder="command")
+                    out_text = gr.Textbox(show_label=False)
+                    btn_timeout_test = gr.Button("timeout test")
+                    btn_timeout_test.click(timeout_test, inputs=command, outputs=out_text, show_progress=False)
+            out_text = gr.Textbox(show_label=False)
     return (terminal, "Terminal", "terminal"),
 script_callbacks.on_ui_tabs(on_ui_tabs)
