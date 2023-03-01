@@ -38,14 +38,14 @@ def on_ui_tabs():
             ```
             """)
             with gr.Group():
-                command = gr.Textbox(show_label=False, max_lines=5, placeholder="command")
+                command = gr.Textbox(show_label=False, lines=1, placeholder="command")
                 out_text = gr.Textbox(show_label=False)
                 btn_static = gr.Button("run static command")
                 btn_static.click(run_static, inputs=command, outputs=out_text)
         with gr.Tab("Training"):
             with gr.Tab("Install Diffusers"):
                 with gr.Group():
-                    command = gr.Textbox(show_label=False, lines=5, value="pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8")
+                    command = gr.Textbox(show_label=False, lines=1, value="pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8")
                     out_text = gr.Textbox(show_label=False)
                     btn_run_live = gr.Button("run live command")
                     btn_run_live.click(run_live, inputs=command, outputs=out_text)
