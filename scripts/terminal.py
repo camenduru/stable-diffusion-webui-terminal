@@ -24,7 +24,6 @@ def timeout_test(second):
 
 def on_ui_tabs():     
     with gr.Blocks() as terminal:
-        terminal.dependencies[0]["show_progress"] = False
         with gr.Tab("Terminal"):
             gr.Markdown(
             """
@@ -41,14 +40,14 @@ def on_ui_tabs():
                 command = gr.Textbox(show_label=False, lines=1, placeholder="command")
                 out_text = gr.Textbox(show_label=False)
                 btn_static = gr.Button("run static command")
-                btn_static.click(run_static, inputs=command, outputs=out_text)
+                btn_static.click(run_static, inputs=command, outputs=out_text, show_progress=False)
         with gr.Tab("Training"):
             with gr.Tab("Install Diffusers"):
                 with gr.Group():
                     command = gr.Textbox(show_label=False, lines=1, value="pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8")
                     out_text = gr.Textbox(show_label=False)
                     btn_run_live = gr.Button("run live command")
-                    btn_run_live.click(run_live, inputs=command, outputs=out_text)
+                    btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
             with gr.Tab("Train Dreambooth"):
                 with gr.Row():
                     with gr.Column():
@@ -88,7 +87,7 @@ def on_ui_tabs():
                             command = gr.Textbox(show_label=False, lines=5, placeholder="command")
                             out_text = gr.Textbox(show_label=False, lines=5)
                             btn_run_live = gr.Button("run live command")
-                            btn_run_live.click(run_live, inputs=command, outputs=out_text)
+                            btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
             with gr.Tab("Train LoRA"):
                 with gr.Row():
                     with gr.Column():
@@ -129,12 +128,12 @@ def on_ui_tabs():
                             command = gr.Textbox(show_label=False, lines=5, placeholder="command")
                             out_text = gr.Textbox(show_label=False, lines=5)
                             btn_run_live = gr.Button("run live command")
-                            btn_run_live.click(run_live, inputs=command, outputs=out_text)
+                            btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
         with gr.Tab("Tests"):
             with gr.Group():
                 command = gr.Textbox(show_label=False, lines=1, placeholder="command")
                 out_text = gr.Textbox(show_label=False)
                 btn_timeout_test = gr.Button("timeout test")
-                btn_timeout_test.click(timeout_test, inputs=command, outputs=out_text)
+                btn_timeout_test.click(timeout_test, inputs=command, outputs=out_text, show_progress=False)
     return (terminal, "Terminal", "terminal"),
 script_callbacks.on_ui_tabs(on_ui_tabs)
