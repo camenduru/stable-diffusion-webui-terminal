@@ -59,11 +59,11 @@ def on_ui_tabs():
                     btn_static.click(run_static, inputs=command, outputs=out_text)
         with gr.Tab("Training"):
             with gr.Tab("Install Diffusers"):
-            with gr.Group():
-                with gr.Box():
-                    out_text = gr.Textbox(show_label=False)
-                    btn_install_diffusers = gr.Button("Install Diffusers")
-                    btn_install_diffusers.click(install_diffusers, [], outputs=out_text)
+                with gr.Group():
+                    with gr.Box():
+                        out_text = gr.Textbox(show_label=False)
+                        btn_install_diffusers = gr.Button("Install Diffusers")
+                        btn_install_diffusers.click(install_diffusers, [], outputs=out_text)
             with gr.Tab("Train Dreambooth"):
                 gr.Markdown(
                 """
@@ -96,6 +96,12 @@ def on_ui_tabs():
                 python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
                 ```
                 """)
+                with gr.Group():
+                    with gr.Box():
+                        command = gr.Textbox(show_label=False, lines=5, placeholder="command")
+                        out_text = gr.Textbox(show_label=False, lines=5)
+                        btn_run_live = gr.Button("run live command")
+                        btn_run_live.click(run_live, inputs=command, outputs=out_text)
             with gr.Tab("Train LoRA"):
                 gr.Markdown(
                 """
@@ -129,14 +135,13 @@ def on_ui_tabs():
                 cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors
                 ```
                 """)
-            with gr.Group():
-                with gr.Box():
-                    command = gr.Textbox(show_label=False, lines=5, placeholder="command")
-                    out_text = gr.Textbox(show_label=False, lines=5)
-                    btn_run_live = gr.Button("run live command")
-                    btn_run_live.click(run_live, inputs=command, outputs=out_text)
+                with gr.Group():
+                    with gr.Box():
+                        command = gr.Textbox(show_label=False, lines=5, placeholder="command")
+                        out_text = gr.Textbox(show_label=False, lines=5)
+                        btn_run_live = gr.Button("run live command")
+                        btn_run_live.click(run_live, inputs=command, outputs=out_text)
         with gr.Tab("Tests"):
-            with gr.Tab("Install Diffusers"):
             with gr.Group():
                 with gr.Box():
                     out_text = gr.Textbox(show_label=False)
