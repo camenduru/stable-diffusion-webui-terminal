@@ -69,8 +69,7 @@ def on_ui_tabs():
                     btn_install_diffusers = gr.Button("Install Diffusers")
                     btn_install_diffusers.click(install_diffusers, [], outputs=out_text)
             with gr.Tab("Train Dreambooth"):
-                with gr.Row():
-                    with gr.Column
+                    with gr.Column:
                         gr.Markdown(
                         """
                         ```py
@@ -102,7 +101,7 @@ def on_ui_tabs():
                         python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
                         ```
                         """)
-                    with gr.Column
+                    with gr.Column:
                         with gr.Group():
                             command = gr.Textbox(show_label=False, lines=5, placeholder="command")
                             out_text = gr.Textbox(show_label=False, lines=5)
@@ -110,7 +109,7 @@ def on_ui_tabs():
                             btn_run_live.click(run_live, inputs=command, outputs=out_text)
             with gr.Tab("Train LoRA"):
                 with gr.Row():
-                    with gr.Column
+                    with gr.Column:
                         gr.Markdown(
                         """
                         ```py
@@ -143,7 +142,7 @@ def on_ui_tabs():
                         cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors
                         ```
                         """)
-                    with gr.Column
+                    with gr.Column:
                         with gr.Group():
                             command = gr.Textbox(show_label=False, lines=5, placeholder="command")
                             out_text = gr.Textbox(show_label=False, lines=5)
