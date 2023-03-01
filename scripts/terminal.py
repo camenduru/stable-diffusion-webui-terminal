@@ -103,30 +103,29 @@ def on_ui_tabs():
                     gr.Markdown(
                     """
                     ```py
-                    python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/train_dreambooth_lora.py \\
-                        --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
-                        --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
-                        --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir" \\
-                        --learning_rate=5e-6 \\
-                        --max_train_steps=650 \\
-                        --instance_prompt="parkminyoung" \\
-                        --resolution=512 \\
-                        --center_crop \\
-                        --train_batch_size=1 \\
-                        --gradient_accumulation_steps=1 \\
-                        --max_grad_norm=1.0 \\
-                        --mixed_precision="fp16" \\
-                        --gradient_checkpointing \\
-                        --enable_xformers_memory_efficient_attention \\
-                        --use_8bit_adam\n
-                        --with_prior_preservation \\
-                        --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/class_data_dir" \\
-                        --prior_loss_weight=1.0 \\
-                        --sample_batch_size=2 \\
-                        --class_prompt="person" \\
-                        --seed=69 \\
-                        --num_class_images=12 \\ \n
-                    python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/convert_diffusers_to_original_stable_diffusion_lora.py
+                    Train Lora Arguments \\
+                    --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
+                    --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
+                    --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir" \\
+                    --learning_rate=5e-6 \\
+                    --max_train_steps=650 \\
+                    --instance_prompt="parkminyoung" \\
+                    --resolution=512 \\
+                    --center_crop \\
+                    --train_batch_size=1 \\
+                    --gradient_accumulation_steps=1 \\
+                    --max_grad_norm=1.0 \\
+                    --mixed_precision="fp16" \\
+                    --gradient_checkpointing \\
+                    --enable_xformers_memory_efficient_attention \\
+                    --use_8bit_adam\n
+                    --with_prior_preservation \\
+                    --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/class_data_dir" \\
+                    --prior_loss_weight=1.0 \\
+                    --sample_batch_size=2 \\
+                    --class_prompt="person" \\
+                    --seed=69 \\
+                    --num_class_images=12 \\ \n
                     ```
                     """)
                     train_lora_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/train_dreambooth_lora.py \\
@@ -145,7 +144,7 @@ def on_ui_tabs():
         --gradient_checkpointing \\
         --enable_xformers_memory_efficient_attention \\
         --use_8bit_adam"""
-                    command = gr.Textbox(show_label=False, lines=5, value=train_lora_command)
+                    command = gr.Textbox(show_label=False, lines=16, value=train_lora_command)
                     out_text = gr.Textbox(show_label=False, lines=5)
                     btn_run_live = gr.Button("Train Lora")
                     btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
@@ -169,6 +168,8 @@ def on_ui_tabs():
             with gr.Box():
                 gr.Markdown(
                 """
+                ```py
+                Copy Lora to Additional Network
                 cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors \\
                 /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors
                 ```
@@ -176,7 +177,7 @@ def on_ui_tabs():
                 cp_command = """cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors \\
                 /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors"""
                 cp = gr.Textbox(show_label=False, lines=2, value=cp_command)
-                btn_static = gr.Button("Convert Diffusers to Original Stable Diffusion")
+                btn_static = gr.Button("Copy Lora to Additional Network")
                 btn_static.click(run_static, inputs=cp, outputs=out_text, show_progress=False)
             with gr.Box():
                 gr.Markdown(
