@@ -84,8 +84,7 @@ def on_ui_tabs():
                         """)
                     with gr.Column():
                         with gr.Group():
-                            train_command = 
-                            """
+                            train_command = """
                             python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/train_dreambooth.py \\
                                 --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
                                 --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
