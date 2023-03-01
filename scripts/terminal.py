@@ -59,7 +59,7 @@ def on_ui_tabs():
                     btn_static.click(run_static, inputs=command, outputs=out_text)
         with gr.Tab("Training"):
             with gr.Tab("Install Diffusers"):
-                with gr.Group():
+                with gr.Box():
                     out_text = gr.Textbox(show_label=False)
                     btn_install_diffusers = gr.Button("Install Diffusers")
                     btn_install_diffusers.click(install_diffusers, [], outputs=out_text)
