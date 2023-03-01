@@ -101,70 +101,75 @@ def on_ui_tabs():
                             out_text = gr.Textbox(show_label=False, lines=5)
                             btn_run_live = gr.Button("Train Dreambooth")
                             btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
-            with gr.Tab("Train LoRA"):
-                with gr.Row():
-                    with gr.Column():
-                        gr.Markdown(
-                        """
-                        ```py
-                        rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/*\n
-                        pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8\n
-                        python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/train_dreambooth_lora.py \\
-                            --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
-                            --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
-                            --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir" \\
-                            --learning_rate=5e-6 \\
-                            --max_train_steps=650 \\
-                            --instance_prompt="parkminyoung" \\
-                            --resolution=512 \\
-                            --center_crop \\
-                            --train_batch_size=1 \\
-                            --gradient_accumulation_steps=1 \\
-                            --max_grad_norm=1.0 \\
-                            --mixed_precision="fp16" \\
-                            --gradient_checkpointing \\
-                            --enable_xformers_memory_efficient_attention \\
-                            --use_8bit_adam\n
-                            --with_prior_preservation \\
-                            --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/class_data_dir" \\
-                            --prior_loss_weight=1.0 \\
-                            --sample_batch_size=2 \\
-                            --class_prompt="person" \\
-                            --seed=69 \\
-                            --num_class_images=12 \\ \n
-                        python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/convert_diffusers_to_original_stable_diffusion_lora.py
-                        cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors
-                        ```
-                        """)
-                    with gr.Column():
-                        with gr.Group():
-                            command = gr.Textbox(show_label=False, lines=5, placeholder="command")
-                            out_text = gr.Textbox(show_label=False, lines=5)
-                            btn_run_live = gr.Button("run live command")
-                            btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
+            # with gr.Tab("Train LoRA"):
+            #     with gr.Row():
+            #         with gr.Column():
+            #             gr.Markdown(
+            #             """
+            #             ```py
+            #             rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/*\n
+            #             pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8\n
+            #             python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/train_dreambooth_lora.py \\
+            #                 --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
+            #                 --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
+            #                 --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir" \\
+            #                 --learning_rate=5e-6 \\
+            #                 --max_train_steps=650 \\
+            #                 --instance_prompt="parkminyoung" \\
+            #                 --resolution=512 \\
+            #                 --center_crop \\
+            #                 --train_batch_size=1 \\
+            #                 --gradient_accumulation_steps=1 \\
+            #                 --max_grad_norm=1.0 \\
+            #                 --mixed_precision="fp16" \\
+            #                 --gradient_checkpointing \\
+            #                 --enable_xformers_memory_efficient_attention \\
+            #                 --use_8bit_adam\n
+            #                 --with_prior_preservation \\
+            #                 --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/class_data_dir" \\
+            #                 --prior_loss_weight=1.0 \\
+            #                 --sample_batch_size=2 \\
+            #                 --class_prompt="person" \\
+            #                 --seed=69 \\
+            #                 --num_class_images=12 \\ \n
+            #             python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/convert_diffusers_to_original_stable_diffusion_lora.py
+            #             cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors
+            #             ```
+            #             """)
+            #         with gr.Column():
+            #             with gr.Group():
+            #                 command = gr.Textbox(show_label=False, lines=5, placeholder="command")
+            #                 out_text = gr.Textbox(show_label=False, lines=5)
+            #                 btn_run_live = gr.Button("run live command")
+            #                 btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
         with gr.Tab("Convert"):
-            gr.Markdown(
-            """
-            ```py
-            Convert Diffusers to Original Stable Diffusion Arguments
-            --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
-            --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
-            ```
-            ```py
-            Remove Output Directory
-            rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*
-            ```
-            """)
+            out_text = gr.Textbox(show_label=False)
             with gr.Group():
+                gr.Markdown(
+                """
+                ```py
+                Convert Diffusers to Original Stable Diffusion Arguments
+                --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
+                --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
+                ```
+                """)
                 convert_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py \\
         --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
         --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt"""
-                rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*"""
                 convert = gr.Textbox(show_label=False, lines=3, value=convert_command)
-                rm = gr.Textbox(show_label=False, lines=3, value=rm_command)
-                out_text = gr.Textbox(show_label=False)
                 btn_static = gr.Button("Convert")
                 btn_static.click(run_static, inputs=convert, outputs=out_text, show_progress=False)
+            with gr.Group():
+                gr.Markdown(
+                """
+                ```py
+                Remove Output Directory
+                rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*
+                ```
+                """)
+                rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*"""
+                rm = gr.Textbox(show_label=False, lines=3, value=rm_command)
+                btn_static = gr.Button("Convert")
                 btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
         with gr.Tab("Tests"):
             with gr.Group():
