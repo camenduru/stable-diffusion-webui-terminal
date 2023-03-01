@@ -69,7 +69,8 @@ def on_ui_tabs():
                     btn_install_diffusers = gr.Button("Install Diffusers")
                     btn_install_diffusers.click(install_diffusers, [], outputs=out_text)
             with gr.Tab("Train Dreambooth"):
-                    with gr.Column():
+                with gr.Row():
+                    with gr.Column:
                         gr.Markdown(
                         """
                         ```py
