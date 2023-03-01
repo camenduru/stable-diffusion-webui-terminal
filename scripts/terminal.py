@@ -1,6 +1,7 @@
 import os, time
 import gradio as gr
 from modules import script_callbacks
+import launch
 
 def run_live(command):
   with os.popen(command) as pipe:
@@ -21,6 +22,20 @@ def timeout_test(second):
     msg = "🥳"
     return msg
 
+def install_diffusers():
+    if not launch.is_installed("diffusers"):
+        launch.run_pip("install diffusers==0.13.1", "diffusers==0.13.1 requirements for diffusers extension")
+    if not launch.is_installed("transformers"):
+        launch.run_pip("install transformers==4.26.1", "transformers==4.26.1 requirements for diffusers extension")
+    if not launch.is_installed("ftfy"):
+        launch.run_pip("install ftfy==6.1.1", "ftfy==6.1.1 requirements for diffusers extension")
+    if not launch.is_installed("accelerate"):
+        launch.run_pip("install accelerate==0.16.0", "accelerate==0.16.0 requirements for diffusers extension")
+    if not launch.is_installed("bitsandbytes"):
+        launch.run_pip("install bitsandbytes==0.37.0", "bitsandbytes==0.37.0 requirements for diffusers extension")
+    if not launch.is_installed("safetensors"):
+        launch.run_pip("install safetensors==0.2.8", "safetensors==0.2.8 requirements for diffusers extension")
+
 def on_ui_tabs():     
     with gr.Blocks() as terminal:
         with gr.Tab("Training"):
@@ -28,12 +43,12 @@ def on_ui_tabs():
                 gr.Markdown(
                 """
                 ```py
-                rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir/*\n
+                rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*\n
                 pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8\n
-                python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/train_dreambooth.py \\
+                python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/train_dreambooth.py \\
                     --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
                     --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
-                    --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir" \\
+                    --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir" \\
                     --learning_rate=5e-6 \\
                     --max_train_steps=650 \\
                     --instance_prompt="parkminyoung" \\
@@ -47,25 +62,25 @@ def on_ui_tabs():
                     --enable_xformers_memory_efficient_attention \\
                     --use_8bit_adam\n
                     --with_prior_preservation \\
-                    --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/class_data_dir" \\
+                    --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/class_data_dir" \\
                     --prior_loss_weight=1.0 \\
                     --sample_batch_size=2 \\
                     --class_prompt="person" \\
                     --seed=69 \\
                     --num_class_images=12 \\ \n
-                python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/convert_diffusers_to_original_stable_diffusion.py --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
+                python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
                 ```
                 """)
             with gr.Tab("Train LoRA"):
                 gr.Markdown(
                 """
                 ```py
-                rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir/*\n
+                rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/*\n
                 pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8\n
-                python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/train_dreambooth_lora.py \\
+                python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/train_dreambooth_lora.py \\
                     --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
                     --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
-                    --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir" \\
+                    --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir" \\
                     --learning_rate=5e-6 \\
                     --max_train_steps=650 \\
                     --instance_prompt="parkminyoung" \\
@@ -79,14 +94,14 @@ def on_ui_tabs():
                     --enable_xformers_memory_efficient_attention \\
                     --use_8bit_adam\n
                     --with_prior_preservation \\
-                    --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/class_data_dir" \\
+                    --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/class_data_dir" \\
                     --prior_loss_weight=1.0 \\
                     --sample_batch_size=2 \\
                     --class_prompt="person" \\
                     --seed=69 \\
                     --num_class_images=12 \\ \n
-                python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/convert_diffusers_to_original_stable_diffusion_lora.py
-                cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir/pytorch_lora_weights.safetensors /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors
+                python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/convert_diffusers_to_original_stable_diffusion_lora.py
+                cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors
                 ```
                 """)
             with gr.Group():
@@ -117,5 +132,8 @@ def on_ui_tabs():
                     
                     btn_timeout_test = gr.Button("timeout test")
                     btn_timeout_test.click(timeout_test, inputs=command, outputs=out_text)
+
+                    btn_install_diffusers = gr.Button("install diffusers")
+                    btn_install_diffusers.click(install_diffusers, [], outputs=out_text)
     return (terminal, "Terminal", "terminal"),
 script_callbacks.on_ui_tabs(on_ui_tabs)
