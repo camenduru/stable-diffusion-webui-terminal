@@ -144,7 +144,7 @@ def on_ui_tabs():
             #                 btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
         with gr.Tab("Convert"):
             out_text = gr.Textbox(show_label=False)
-            with gr.Group():
+            with gr.Box():
                 gr.Markdown(
                 """
                 ```py
@@ -157,9 +157,9 @@ def on_ui_tabs():
         --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
         --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt"""
                 convert = gr.Textbox(show_label=False, lines=3, value=convert_command)
-                btn_static = gr.Button("Convert")
+                btn_static = gr.Button("Convert Diffusers to Original Stable Diffusion")
                 btn_static.click(run_static, inputs=convert, outputs=out_text, show_progress=False)
-            with gr.Group():
+            with gr.Box():
                 gr.Markdown(
                 """
                 ```py
@@ -169,7 +169,7 @@ def on_ui_tabs():
                 """)
                 rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*"""
                 rm = gr.Textbox(show_label=False, lines=3, value=rm_command)
-                btn_static = gr.Button("Convert")
+                btn_static = gr.Button("Remove Output Directory")
                 btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
         with gr.Tab("Tests"):
             with gr.Group():
