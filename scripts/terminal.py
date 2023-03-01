@@ -1,6 +1,7 @@
 import os, time
 import gradio as gr
 from modules import script_callbacks
+from subprocess import getoutput
 import launch
 
 def run_live(command):
