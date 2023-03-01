@@ -387,8 +387,8 @@ def parse_args(input_args=None):
     else:
         args = parser.parse_args()
 
-    if '-h' in args or '--help' in args:
-        parser.print_help()
+    # if '-h' in args or '--help' in args:
+    #     parser.print_help()
 
     env_local_rank = int(os.environ.get("LOCAL_RANK", -1))
     if env_local_rank != -1 and env_local_rank != args.local_rank:
