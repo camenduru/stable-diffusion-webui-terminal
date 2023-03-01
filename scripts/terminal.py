@@ -54,30 +54,29 @@ def on_ui_tabs():
                         gr.Markdown(
                         """
                         ```py
-                        rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*\n
-                        python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/train_dreambooth.py \\
-                            --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
-                            --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
-                            --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir" \\
-                            --learning_rate=5e-6 \\
-                            --max_train_steps=650 \\
-                            --instance_prompt="parkminyoung" \\
-                            --resolution=512 \\
-                            --center_crop \\
-                            --train_batch_size=1 \\
-                            --gradient_accumulation_steps=1 \\
-                            --max_grad_norm=1.0 \\
-                            --mixed_precision="fp16" \\
-                            --gradient_checkpointing \\
-                            --enable_xformers_memory_efficient_attention \\
-                            --use_8bit_adam\n
-                            --with_prior_preservation \\
-                            --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/class_data_dir" \\
-                            --prior_loss_weight=1.0 \\
-                            --sample_batch_size=2 \\
-                            --class_prompt="person" \\
-                            --seed=69 \\
-                            --num_class_images=12 \\ \n
+                        Train Dreambooth Arguments 
+                        --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
+                        --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
+                        --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir" \\
+                        --learning_rate=5e-6 \\
+                        --max_train_steps=650 \\
+                        --instance_prompt="parkminyoung" \\
+                        --resolution=512 \\
+                        --center_crop \\
+                        --train_batch_size=1 \\
+                        --gradient_accumulation_steps=1 \\
+                        --max_grad_norm=1.0 \\
+                        --mixed_precision="fp16" \\
+                        --gradient_checkpointing \\
+                        --enable_xformers_memory_efficient_attention \\
+                        --use_8bit_adam\n
+                        --with_prior_preservation \\
+                        --class_data_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/class_data_dir" \\
+                        --prior_loss_weight=1.0 \\
+                        --sample_batch_size=2 \\
+                        --class_prompt="person" \\
+                        --seed=69 \\
+                        --num_class_images=12 \\ \n
                         ```
                         """)
                     with gr.Column():
@@ -147,19 +146,26 @@ def on_ui_tabs():
             gr.Markdown(
             """
             ```py
-            python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py \\
-                --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
-                --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
+            Convert Diffusers to Original Stable Diffusion Arguments
+            --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
+            --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
+            ```
+            ```py
+            Remove Output Directory
+            rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*
             ```
             """)
             with gr.Group():
-                train_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py \\
+                convert_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py \\
         --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
         --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt"""
-                command = gr.Textbox(show_label=False, lines=1, placeholder="command")
+                rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*"""
+                convert = gr.Textbox(show_label=False, lines=3, value=convert_command)
+                rm = gr.Textbox(show_label=False, lines=3, value=rm_command)
                 out_text = gr.Textbox(show_label=False)
-                btn_static = gr.Button("run static command")
-                btn_static.click(run_static, inputs=command, outputs=out_text, show_progress=False)
+                btn_static = gr.Button("Convert")
+                btn_static.click(run_static, inputs=convert, outputs=out_text, show_progress=False)
+                btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
         with gr.Tab("Tests"):
             with gr.Group():
                 command = gr.Textbox(show_label=False, lines=1, placeholder="command")
