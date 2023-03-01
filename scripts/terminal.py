@@ -147,10 +147,15 @@ def on_ui_tabs():
             gr.Markdown(
             """
             ```py
-            python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
+            python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py \\
+                --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
+                --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
             ```
             """)
             with gr.Group():
+                train_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py \\
+        --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
+        --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt"""
                 command = gr.Textbox(show_label=False, lines=1, placeholder="command")
                 out_text = gr.Textbox(show_label=False)
                 btn_static = gr.Button("run static command")
