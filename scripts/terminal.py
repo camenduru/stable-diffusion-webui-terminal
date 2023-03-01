@@ -24,10 +24,9 @@ def timeout_test(second):
 
 def on_ui_tabs():     
     with gr.Blocks() as terminal:
-        with gr.Tab("Terminal"):
+        with gr.Tab("💻 Terminal"):
             gr.Markdown(
             """
-            ### 💻 Terminal
             ```py
             model: wget https://huggingface.co/ckpt/anything-v4.5-vae-swapped/resolve/main/anything-v4.5-vae-swapped.safetensors -O /content/stable-diffusion-webui/models/Stable-diffusion/anything-v4.5-vae-swapped.safetensors
             lora:  wget https://huggingface.co/embed/Sakimi-Chan_LoRA/resolve/main/Sakimi-Chan_LoRA.safetensors -O /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/Sakimi-Chan_LoRA.safetensors
@@ -175,7 +174,7 @@ def on_ui_tabs():
                 ```
                 """)
                 cp_command = """cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors \\
-                /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors"""
+/content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors"""
                 cp = gr.Textbox(show_label=False, lines=2, value=cp_command)
                 btn_static = gr.Button("Copy Lora to Additional Network")
                 btn_static.click(run_static, inputs=cp, outputs=out_text, show_progress=False)
@@ -188,7 +187,7 @@ def on_ui_tabs():
                 ```
                 """)
                 rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*"""
-                rm = gr.Textbox(show_label=False, lines=3, value=rm_command)
+                rm = gr.Textbox(show_label=False, lines=1, value=rm_command)
                 btn_static = gr.Button("Remove Dreambooth Output Directory")
                 btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
             with gr.Box():
@@ -200,7 +199,7 @@ def on_ui_tabs():
                 ```
                 """)
                 rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/*"""
-                rm = gr.Textbox(show_label=False, lines=3, value=rm_command)
+                rm = gr.Textbox(show_label=False, lines=1, value=rm_command)
                 btn_static = gr.Button("Remove Lora Output Directory")
                 btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
         with gr.Tab("Tests"):
