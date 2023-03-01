@@ -2,7 +2,6 @@ import os, time
 import gradio as gr
 from modules import script_callbacks
 from subprocess import getoutput
-import launch
 
 def run_live(command):
   with os.popen(command) as pipe:
@@ -25,6 +24,7 @@ def timeout_test(second):
 
 def on_ui_tabs():     
     with gr.Blocks() as terminal:
+        terminal.dependencies[0]["show_progress"] = False
         with gr.Tab("Terminal"):
             gr.Markdown(
             """
