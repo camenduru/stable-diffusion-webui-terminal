@@ -467,12 +467,12 @@ def on_ui_tabs():
                         gr.Markdown(
                         """
                         ```py
-                        --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
+                        --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir \\
                         --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
                         ```
                         """)
                     convert_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py \\
-            --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir \\
+            --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir \\
             --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt"""
                     convert = gr.Textbox(show_label=False, lines=3, value=convert_command)
                     btn_static = gr.Button("Convert Diffusers to Original Stable Diffusion")
