@@ -84,8 +84,7 @@ def on_ui_tabs():
                         """)
                     with gr.Column():
                         with gr.Group():
-                            train_command = """
-                            python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/train_dreambooth.py \\
+                            train_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/train_dreambooth.py \\
                                 --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
                                 --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
                                 --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir" \\
@@ -102,7 +101,7 @@ def on_ui_tabs():
                                 --enable_xformers_memory_efficient_attention \\
                                 --use_8bit_adam
                             """
-                            command = gr.Textbox(show_label=False, lines=5, value=train_command)
+                            command = gr.Textbox(show_label=False, lines=16, value=train_command)
                             out_text = gr.Textbox(show_label=False, lines=5)
                             btn_run_live = gr.Button("run live command")
                             btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
