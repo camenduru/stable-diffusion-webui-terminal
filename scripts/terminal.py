@@ -175,10 +175,10 @@ def on_ui_tabs():
                         rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*
                         ```
                         """)
-                        rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*"""
-                        rm = gr.Textbox(show_label=False, lines=1, value=rm_command)
-                        btn_static = gr.Button("Remove Dreambooth Output Directory")
-                        btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
+                    rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*"""
+                    rm = gr.Textbox(show_label=False, lines=1, value=rm_command)
+                    btn_static = gr.Button("Remove Dreambooth Output Directory")
+                    btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
                 out_text = gr.Textbox(show_label=False)
             with gr.Group():
                 with gr.Box():
