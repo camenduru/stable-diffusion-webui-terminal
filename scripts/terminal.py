@@ -39,7 +39,31 @@ def install_diffusers():
 
 def on_ui_tabs():     
     with gr.Blocks() as terminal:
+        with gr.Tab("Terminal"):
+            gr.Markdown(
+            """
+            ### 💻 Terminal
+            ```py
+            model: wget https://huggingface.co/ckpt/anything-v4.5-vae-swapped/resolve/main/anything-v4.5-vae-swapped.safetensors -O /content/stable-diffusion-webui/models/Stable-diffusion/anything-v4.5-vae-swapped.safetensors
+            lora:  wget https://huggingface.co/embed/Sakimi-Chan_LoRA/resolve/main/Sakimi-Chan_LoRA.safetensors -O /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/Sakimi-Chan_LoRA.safetensors
+            embed: wget https://huggingface.co/embed/bad_prompt/resolve/main/bad_prompt_version2.pt -O /content/stable-diffusion-webui/embeddings/bad_prompt_version2.pt
+            vae:   wget https://huggingface.co/ckpt/trinart_characters_19.2m_stable_diffusion_v1/resolve/main/autoencoder_fix_kl-f8-trinart_characters.ckpt -O /content/stable-diffusion-webui/models/VAE/autoencoder_fix_kl-f8-trinart_characters.vae.pt
+            zip outputs folder: zip -r /content/outputs.zip /content/stable-diffusion-webui/outputs
+            ```
+            """)
+            with gr.Group():
+                with gr.Box():
+                    command = gr.Textbox(show_label=False, max_lines=1, placeholder="command")
+                    out_text = gr.Textbox(show_label=False)
+                    btn_static = gr.Button("run static command")
+                    btn_static.click(run_static, inputs=command, outputs=out_text)
         with gr.Tab("Training"):
+            with gr.Tab("Install Diffusers"):
+            with gr.Group():
+                with gr.Box():
+                    out_text = gr.Textbox(show_label=False)
+                    btn_install_diffusers = gr.Button("Install Diffusers")
+                    btn_install_diffusers.click(install_diffusers, [], outputs=out_text)
             with gr.Tab("Train Dreambooth"):
                 gr.Markdown(
                 """
@@ -111,30 +135,12 @@ def on_ui_tabs():
                     out_text = gr.Textbox(show_label=False, lines=5)
                     btn_run_live = gr.Button("run live command")
                     btn_run_live.click(run_live, inputs=command, outputs=out_text)
-
-        with gr.Tab("Terminal"):
-            gr.Markdown(
-            """
-            ### 💻 Terminal
-            ```py
-            model: wget https://huggingface.co/ckpt/anything-v4.5-vae-swapped/resolve/main/anything-v4.5-vae-swapped.safetensors -O /content/stable-diffusion-webui/models/Stable-diffusion/anything-v4.5-vae-swapped.safetensors
-            lora:  wget https://huggingface.co/embed/Sakimi-Chan_LoRA/resolve/main/Sakimi-Chan_LoRA.safetensors -O /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/Sakimi-Chan_LoRA.safetensors
-            embed: wget https://huggingface.co/embed/bad_prompt/resolve/main/bad_prompt_version2.pt -O /content/stable-diffusion-webui/embeddings/bad_prompt_version2.pt
-            vae:   wget https://huggingface.co/ckpt/trinart_characters_19.2m_stable_diffusion_v1/resolve/main/autoencoder_fix_kl-f8-trinart_characters.ckpt -O /content/stable-diffusion-webui/models/VAE/autoencoder_fix_kl-f8-trinart_characters.vae.pt
-            zip outputs folder: zip -r /content/outputs.zip /content/stable-diffusion-webui/outputs
-            ```
-            """)
+        with gr.Tab("Tests"):
+            with gr.Tab("Install Diffusers"):
             with gr.Group():
                 with gr.Box():
-                    command = gr.Textbox(show_label=False, max_lines=1, placeholder="command")
                     out_text = gr.Textbox(show_label=False)
-                    btn_static = gr.Button("run static command")
-                    btn_static.click(run_static, inputs=command, outputs=out_text)
-                    
                     btn_timeout_test = gr.Button("timeout test")
                     btn_timeout_test.click(timeout_test, inputs=command, outputs=out_text)
-
-                    btn_install_diffusers = gr.Button("install diffusers")
-                    btn_install_diffusers.click(install_diffusers, [], outputs=out_text)
     return (terminal, "Terminal", "terminal"),
 script_callbacks.on_ui_tabs(on_ui_tabs)
