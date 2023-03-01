@@ -52,7 +52,7 @@ def on_ui_tabs():
         with gr.Tab("Training"):
             with gr.Tab("Train Dreambooth"):
                 with gr.Box():
-                    gr.Accordion("Train Dreambooth Arguments"):
+                    with gr.Accordion("Train Dreambooth Arguments"):
                         gr.Markdown(
                         """
                         ```py
@@ -102,7 +102,7 @@ def on_ui_tabs():
                     btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
             with gr.Tab("Train LoRA"):
                 with gr.Box():
-                    gr.Accordion("Train Ora Arguments"):
+                    with gr.Accordion("Train Ora Arguments"):
                         gr.Markdown(
                         """
                         ```py
