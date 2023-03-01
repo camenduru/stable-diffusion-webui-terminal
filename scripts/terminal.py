@@ -23,26 +23,6 @@ def timeout_test(second):
     msg = "🥳"
     return msg
 
-def install_diffusers():
-    if not launch.is_installed("diffusers"):
-        launch.run_pip("install diffusers==0.13.1", "diffusers==0.13.1 requirements for diffusers extension")
-        yield "diffusers==0.13.1 requirements for diffusers extension"
-    if not launch.is_installed("transformers"):
-        launch.run_pip("install transformers==4.26.1", "transformers==4.26.1 requirements for diffusers extension")
-        yield "transformers==4.26.1 requirements for diffusers extension"
-    if not launch.is_installed("ftfy"):
-        launch.run_pip("install ftfy==6.1.1", "ftfy==6.1.1 requirements for diffusers extension")
-        yield "ftfy==6.1.1 requirements for diffusers extension"
-    if not launch.is_installed("accelerate"):
-        launch.run_pip("install accelerate==0.16.0", "accelerate==0.16.0 requirements for diffusers extension")
-        yield "accelerate==0.16.0 requirements for diffusers extension"
-    if not launch.is_installed("bitsandbytes"):
-        launch.run_pip("install bitsandbytes==0.37.0", "bitsandbytes==0.37.0 requirements for diffusers extension")
-        yield "bitsandbytes==0.37.0 requirements for diffusers extension"
-    if not launch.is_installed("safetensors"):
-        launch.run_pip("install safetensors==0.2.8", "safetensors==0.2.8 requirements for diffusers extension")
-        yield "safetensors==0.2.8 requirements for diffusers extension"
-
 def on_ui_tabs():     
     with gr.Blocks() as terminal:
         with gr.Tab("Terminal"):
@@ -65,9 +45,10 @@ def on_ui_tabs():
         with gr.Tab("Training"):
             with gr.Tab("Install Diffusers"):
                 with gr.Group():
+                    command = gr.Textbox(show_label=False, lines=5, value="pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8")
                     out_text = gr.Textbox(show_label=False)
-                    btn_install_diffusers = gr.Button("Install Diffusers")
-                    btn_install_diffusers.click(install_diffusers, [], outputs=out_text)
+                    btn_run_live = gr.Button("run live command")
+                    btn_run_live.click(run_live, inputs=command, outputs=out_text)
             with gr.Tab("Train Dreambooth"):
                 with gr.Row():
                     with gr.Column():
