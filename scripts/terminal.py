@@ -84,22 +84,23 @@ def on_ui_tabs():
                         """)
                     with gr.Column():
                         with gr.Group():
-                            train_command = """
-                            python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/train_dreambooth.py \
-                                --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \
-                                --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \
-                                --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir" \
-                                --learning_rate=5e-6 \
-                                --max_train_steps=650 \
-                                --instance_prompt="parkminyoung" \
-                                --resolution=512 \
-                                --center_crop \
-                                --train_batch_size=1 \
-                                --gradient_accumulation_steps=1 \
-                                --max_grad_norm=1.0 \
-                                --mixed_precision="fp16" \
-                                --gradient_checkpointing \
-                                --enable_xformers_memory_efficient_attention \
+                            train_command = 
+                            """
+                            python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/train_dreambooth.py \\
+                                --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
+                                --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
+                                --output_dir="/content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir" \\
+                                --learning_rate=5e-6 \\
+                                --max_train_steps=650 \\
+                                --instance_prompt="parkminyoung" \\
+                                --resolution=512 \\
+                                --center_crop \\
+                                --train_batch_size=1 \\
+                                --gradient_accumulation_steps=1 \\
+                                --max_grad_norm=1.0 \\
+                                --mixed_precision="fp16" \\
+                                --gradient_checkpointing \\
+                                --enable_xformers_memory_efficient_attention \\
                                 --use_8bit_adam
                             """
                             command = gr.Textbox(show_label=False, lines=5, value=train_command)
