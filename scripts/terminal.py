@@ -55,7 +55,6 @@ def on_ui_tabs():
                         """
                         ```py
                         rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*\n
-                        pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8\n
                         python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/train_dreambooth.py \\
                             --pretrained_model_name_or_path="JosephusCheung/ACertainty"  \\
                             --instance_data_dir="/content/drive/MyDrive/AI/training/parkminyoung" \\
@@ -79,7 +78,6 @@ def on_ui_tabs():
                             --class_prompt="person" \\
                             --seed=69 \\
                             --num_class_images=12 \\ \n
-                        python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
                         ```
                         """)
                     with gr.Column():
@@ -145,6 +143,18 @@ def on_ui_tabs():
                             out_text = gr.Textbox(show_label=False, lines=5)
                             btn_run_live = gr.Button("run live command")
                             btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
+        with gr.Tab("Convert"):
+            gr.Markdown(
+            """
+            ```py
+            python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-diffusers/output_dir --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt
+            ```
+            """)
+            with gr.Group():
+                command = gr.Textbox(show_label=False, lines=1, placeholder="command")
+                out_text = gr.Textbox(show_label=False)
+                btn_static = gr.Button("run static command")
+                btn_static.click(run_static, inputs=command, outputs=out_text, show_progress=False)
         with gr.Tab("Tests"):
             with gr.Group():
                 command = gr.Textbox(show_label=False, lines=1, placeholder="command")
