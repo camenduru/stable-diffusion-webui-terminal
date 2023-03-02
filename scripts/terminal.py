@@ -4,11 +4,14 @@ from modules import script_callbacks
 from subprocess import getoutput
 
 def run_live(command):
-  with os.popen(command) as pipe:
-    for line in pipe:
-      line = line.rstrip()
-      print(line)
-      yield line
+    with os.popen(command) as pipe:
+        prev_line = None
+        for line in pipe:
+            line = line.rstrip()
+            if line != prev_line:
+                print(line)
+            prev_line = line
+            yield line
 
 def run_static(command):
     out = getoutput(f"{command}")
