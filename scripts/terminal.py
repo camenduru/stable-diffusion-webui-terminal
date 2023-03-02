@@ -253,7 +253,7 @@ def on_ui_tabs():
         --enable_xformers_memory_efficient_attention \\
         --use_8bit_adam"""
                     dreambooth_command = gr.Textbox(show_label=False, lines=16, value=train_dreambooth_command)
-                    train_dreambooth_out_text = gr.Textbox(show_label=False, lines=5)
+                    train_dreambooth_out_text = gr.Textbox(show_label=False)
                     btn_train_dreambooth_run_live = gr.Button("Train Dreambooth")
                     btn_train_dreambooth_run_live.click(run_live, inputs=dreambooth_command, outputs=train_dreambooth_out_text, show_progress=False)
             with gr.Tab("Train LoRA"):
@@ -457,7 +457,7 @@ def on_ui_tabs():
         --enable_xformers_memory_efficient_attention \\
         --use_8bit_adam"""
                     lora_command = gr.Textbox(show_label=False, lines=16, value=train_lora_command)
-                    train_lora_out_text = gr.Textbox(show_label=False, lines=5)
+                    train_lora_out_text = gr.Textbox(show_label=False)
                     btn_train_lora_run_live = gr.Button("Train Lora")
                     btn_train_lora_run_live.click(run_live, inputs=lora_command, outputs=train_lora_out_text, show_progress=False)
         with gr.Tab("Convert"):
