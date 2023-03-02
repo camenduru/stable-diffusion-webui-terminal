@@ -915,6 +915,7 @@ def main(args):
             # Checks if the accelerator has performed an optimization step behind the scenes
             if accelerator.sync_gradients:
                 progress_bar.update(1)
+                print(global_step)
                 global_step += 1
 
                 if global_step % args.checkpointing_steps == 0:
