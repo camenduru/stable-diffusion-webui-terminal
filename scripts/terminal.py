@@ -43,12 +43,12 @@ def on_ui_tabs():
                 terminal_out_text = gr.Textbox(show_label=False)
                 btn_terminl_run_static = gr.Button("run static command")
                 btn_terminl_run_static.click(run_static, inputs=terminal_command, outputs=terminal_out_text, show_progress=False)
-        with gr.Tab("Install"):
-            with gr.Box():
-                install_command = gr.Textbox(show_label=False, lines=1, value="pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8")
-                install_out_text = gr.Textbox(show_label=False)
-                btn_install_run_live = gr.Button("Install Diffusers")
-                btn_install_run_live.click(run_live, inputs=install_command, outputs=install_out_text, show_progress=False)
+        # with gr.Tab("Install"):
+        #     with gr.Box():
+        #         install_command = gr.Textbox(show_label=False, lines=1, value="pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8")
+        #         install_out_text = gr.Textbox(show_label=False)
+        #         btn_install_run_live = gr.Button("Install Diffusers")
+        #         btn_install_run_live.click(run_live, inputs=install_command, outputs=install_out_text, show_progress=False)
         with gr.Tab("Training"):
             with gr.Tab("Train Dreambooth"):
                 with gr.Box():
