@@ -39,16 +39,16 @@ def on_ui_tabs():
             ```
             """)
             with gr.Box():
-                command = gr.Textbox(show_label=False, lines=1, placeholder="command")
-                out_text = gr.Textbox(show_label=False)
+                terminal_command = gr.Textbox(show_label=False, lines=1, placeholder="command")
+                terminal_out_text = gr.Textbox(show_label=False)
                 btn_static = gr.Button("run static command")
-                btn_static.click(run_static, inputs=command, outputs=out_text, show_progress=False)
+                btn_static.click(run_static, inputs=terminal_command, outputs=terminal_out_text, show_progress=False)
         with gr.Tab("Install"):
             with gr.Box():
-                command = gr.Textbox(show_label=False, lines=1, value="pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8")
-                out_text = gr.Textbox(show_label=False)
+                install_command = gr.Textbox(show_label=False, lines=1, value="pip install -U diffusers==0.13.1 transformers==4.26.1 ftfy==6.1.1 accelerate==0.16.0 bitsandbytes==0.37.0 safetensors==0.2.8")
+                install_out_text = gr.Textbox(show_label=False)
                 btn_run_live = gr.Button("Install Diffusers")
-                btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
+                btn_run_live.click(run_live, inputs=install_command, outputs=install_out_text, show_progress=False)
         with gr.Tab("Training"):
             with gr.Tab("Train Dreambooth"):
                 with gr.Box():
@@ -252,10 +252,10 @@ def on_ui_tabs():
         --gradient_checkpointing \\
         --enable_xformers_memory_efficient_attention \\
         --use_8bit_adam"""
-                    command = gr.Textbox(show_label=False, lines=16, value=train_dreambooth_command)
-                    out_text = gr.Textbox(show_label=False, lines=5)
+                    dreambooth_command = gr.Textbox(show_label=False, lines=16, value=train_dreambooth_command)
+                    train_dreambooth_out_text = gr.Textbox(show_label=False, lines=5)
                     btn_run_live = gr.Button("Train Dreambooth")
-                    btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
+                    btn_run_live.click(run_live, inputs=dreambooth_command, outputs=train_dreambooth_out_text, show_progress=False)
             with gr.Tab("Train LoRA"):
                 with gr.Box():
                     with gr.Accordion("Train Lora Common Arguments", open=False):
@@ -456,10 +456,10 @@ def on_ui_tabs():
         --gradient_checkpointing \\
         --enable_xformers_memory_efficient_attention \\
         --use_8bit_adam"""
-                    command = gr.Textbox(show_label=False, lines=16, value=train_lora_command)
-                    out_text = gr.Textbox(show_label=False, lines=5)
+                    lora_command = gr.Textbox(show_label=False, lines=16, value=train_lora_command)
+                    train_lora_out_text = gr.Textbox(show_label=False, lines=5)
                     btn_run_live = gr.Button("Train Lora")
-                    btn_run_live.click(run_live, inputs=command, outputs=out_text, show_progress=False)
+                    btn_run_live.click(run_live, inputs=lora_command, outputs=train_lora_out_text, show_progress=False)
         with gr.Tab("Convert"):
             with gr.Group():
                 with gr.Box():
@@ -474,9 +474,10 @@ def on_ui_tabs():
                     convert_command = """python /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/convert_diffusers_to_original_stable_diffusion.py \\
             --model_path /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir \\
             --checkpoint_path /content/stable-diffusion-webui/models/Stable-diffusion/parkminyoung.ckpt"""
-                    convert = gr.Textbox(show_label=False, lines=3, value=convert_command)
+                    convert_dreambooth = gr.Textbox(show_label=False, lines=3, value=convert_command)
+                    convert_dreambooth_out_text = gr.Textbox(show_label=False)
                     btn_static = gr.Button("Convert Diffusers to Original Stable Diffusion")
-                    btn_static.click(run_static, inputs=convert, outputs=out_text, show_progress=False)
+                    btn_static.click(run_static, inputs=convert_dreambooth, outputs=convert_dreambooth_out_text, show_progress=False)
                 with gr.Box():
                     with gr.Accordion("Remove Dreambooth Output Directory", open=False):
                         gr.Markdown(
@@ -485,11 +486,11 @@ def on_ui_tabs():
                         rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*
                         ```
                         """)
-                    rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*"""
-                    rm = gr.Textbox(show_label=False, lines=1, value=rm_command)
+                    rm_dreambooth_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/dreambooth/output_dir/*"""
+                    rm_dreambooth = gr.Textbox(show_label=False, lines=1, value=rm_dreambooth_command)
+                    rm_dreambooth_out_text = gr.Textbox(show_label=False)
                     btn_static = gr.Button("Remove Dreambooth Output Directory")
-                    btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
-                out_text = gr.Textbox(show_label=False)
+                    btn_static.click(run_static, inputs=rm_dreambooth, outputs=rm_dreambooth_out_text, show_progress=False)
             with gr.Group():
                 with gr.Box():
                     with gr.Accordion("Copy Lora to Additional Network", open=False):
@@ -500,11 +501,12 @@ def on_ui_tabs():
                         /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors
                         ```
                         """)
-                    cp_command = """cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors \\
+                    cp_lora_command = """cp /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/pytorch_lora_weights.safetensors \\
         /content/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora/parkminyoung.safetensors"""
-                    cp = gr.Textbox(show_label=False, lines=2, value=cp_command)
+                    cp_lora = gr.Textbox(show_label=False, lines=2, value=cp_lora_command)
+                    cp_lora_out_text = gr.Textbox(show_label=False)
                     btn_static = gr.Button("Copy Lora to Additional Network")
-                    btn_static.click(run_static, inputs=cp, outputs=out_text, show_progress=False)
+                    btn_static.click(run_static, inputs=cp_lora, outputs=cp_lora_out_text, show_progress=False)
                 with gr.Box():
                     with gr.Accordion("Remove Lora Output Directory", open=False):
                         gr.Markdown(
@@ -513,18 +515,19 @@ def on_ui_tabs():
                         rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/*
                         ```
                         """)
-                    rm_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/*"""
-                    rm = gr.Textbox(show_label=False, lines=1, value=rm_command)
+                    rm_lora_command = """rm -rf /content/stable-diffusion-webui/extensions/stable-diffusion-webui-terminal/training/lora/output_dir/*"""
+                    rm_lora = gr.Textbox(show_label=False, lines=1, value=rm_lora_command)
+                    rm_lora_out_text = gr.Textbox(show_label=False)
                     btn_static = gr.Button("Remove Lora Output Directory")
-                    btn_static.click(run_static, inputs=rm, outputs=out_text, show_progress=False)
-                out_text = gr.Textbox(show_label=False)
+                    btn_static.click(run_static, inputs=rm_lora, outputs=rm_lora_out_text, show_progress=False)
+                
         with gr.Tab("Tests"):
             with gr.Box():
-                command = gr.Textbox(show_label=False, lines=1, placeholder="command")
-                out_text = gr.Textbox(show_label=False)
+                test_command = gr.Textbox(show_label=False, lines=1, placeholder="command")
+                test_out_text = gr.Textbox(show_label=False)
                 btn_timeout_test = gr.Button("timeout test")
-                btn_timeout_test.click(timeout_test, inputs=command, outputs=out_text, show_progress=False)
+                btn_timeout_test.click(timeout_test, inputs=test_command, outputs=test_out_text, show_progress=False)
                 btn_clear = gr.Button("clear")
-                btn_clear.click(clear_out_text, inputs=[], outputs=out_text, show_progress=False)
+                btn_clear.click(clear_out_text, inputs=[], outputs=test_out_text, show_progress=False)
     return (terminal, "Terminal", "terminal"),
 script_callbacks.on_ui_tabs(on_ui_tabs)
