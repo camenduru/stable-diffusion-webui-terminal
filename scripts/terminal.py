@@ -1,20 +1,14 @@
 import os, time
 import gradio as gr
 from modules import script_callbacks
-import subprocess
 from subprocess import getoutput
 
 def run_live(command):
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-    while True:
-        output = process.stdout.readline()
-        error = process.stderr.readline()
-        if output == "" and error == "":
-            break
-        if output:
-            yield output.rstrip()
-        if error:
-            yield error.rstrip()
+  with os.popen(command) as pipe:
+    for line in pipe:
+      line = line.rstrip()
+    #   print(line)
+      yield line
 
 def run_static(command):
     out = getoutput(f"{command}")
